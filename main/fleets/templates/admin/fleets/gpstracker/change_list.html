@@ -1,0 +1,10 @@
+{% extends "admin/change_list.html" %} {% load i18n %}
+{% block object-tools-items %}
+
+        <li><a href="{% url 'admin:export_tracker_csv' %}">Export CSV</a></li>
+    {% if perms.fleets.add_vehicle %}
+        <li><a href="{% url 'admin:import_tracker_csv' %}">Upload CSV</a></li>
+    {% endif %}
+
+    {{ block.super }}
+{% endblock %}

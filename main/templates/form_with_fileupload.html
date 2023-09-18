@@ -1,0 +1,23 @@
+{% extends "admin/base_change_form.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h4 class="text-center"> {{ title }} </h4>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <input type="hidden" name="action" value={{ action }} />
+  <input type="hidden" name="set_status" value="yes" />
+
+  <div>
+    {{ form|crispy }}
+    <div class="text-center">
+      <input type="submit" value="Submit" class="btn btn-primary" />
+    </div>
+  </div>
+
+  {% for object in objects %}
+  <input type="hidden" name="_selected_action" value="{{ object.id }}" />
+  {% endfor %}
+</form>
+{% endblock %}
